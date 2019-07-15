@@ -1,0 +1,11 @@
+.DS_Store
+app/__pycache__/
+app/session_data.sqlite3
+postgres_data/*
+.idea/
+certbot/
+app/postgres.cfg
+app/flask.cfg
+app/teams.json
+app/downloads
+static/files/*

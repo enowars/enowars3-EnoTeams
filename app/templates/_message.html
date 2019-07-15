@@ -1,0 +1,6 @@
+{% if msg %}
+    <div class="pure-alert pure-alert-{{ msg_type }}">
+        <span class="msg-type">{{ msg_type[0]|upper }}{{ msg_type[1:] }}:</span>
+        {{ msg }}
+    </div>
+{% endif %}

@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% block content %}
+    <div class="content-subpage">
+
+        <h2 class="content-head is-center">Reset password</h2>
+        <div class="pure-g">
+            <div class="pure-u-1 maxw-700 div-is-center">
+                {% include '_message.html' %}
+                {% if token %}
+                <form class="pure-form pure-form-stacked" action="{{url_for('page_reset_password')}}?token={{ token }}" method="post">
+                    <fieldset>
+
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" placeholder="Your New Password" required>
+
+                        <button type="submit" class="pure-button">Set Password</button>
+                    </fieldset>
+                </form>
+                {% else %}
+                <form class="pure-form pure-form-stacked" action="{{url_for('page_reset_password')}}" method="post">
+                    <fieldset>
+
+                        <label for="email">E-Mail</label>
+                        <input id="email" name="email" type="email" placeholder="Your E-Mail-Address"
+                               {% if email %} value="{{ email }}"{% endif %} required>
+
+                        <button type="submit" class="pure-button">Request Password Reset E-Mail</button>
+                    </fieldset>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

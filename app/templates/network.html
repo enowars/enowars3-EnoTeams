@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="content-subpage">
+
+    <h2 class="content-head is-center"><i class="fa fa-network-wired"></i> Network</h2>
+    <div class="pure-g">
+        <div class="pure-u-1 maxw-1000 div-is-center">
+            <h3>In a dystopian world, IPv4 is no more...</h3>
+            <p>
+                .... there's only IPv6, which nobody understands nor knows how to use. Without getting used to it, you won't have a chance on this planet anymore.
+            </p>
+            <h4>Network IPs</h4>
+            <p>
+                Here are some important IPs that you might need:
+
+                <ul>
+                    <li><strong>fd00:1337::1337</strong> - The gameserver where you can submit flags to on port <strong>1337</strong>. To test your network connection, netcat port <strong>4242</strong>.</li>
+                    <li><strong>fd00:1337:X::/48</strong> - Team X's own subnet, where their services are accessible and your team member's systems should reside.</li>
+                    <li><strong>fd00:1337:X:Y::Z/64</strong> - Team X's service has its own /64 subnet Y, where its dockerized containers have IP Z.</li>
+                </ul>
+            </p>
+            <h4>Routing</h4>
+            <p>
+                We will only route the <strong>fd00:1337::/32</strong> within our game (VPN) network. No public connections over our game router will be possible.
+            </p>
+            <h4>VPN</h4>
+            <p>
+                The whole competition will take place within a VPN. It will be based on OpenVPN 2.4. and use IPv4 to connect to our OpenVPN instances. 
+                You can download your team's VPN configuration after signing up on this website. 
+
+                Keep in mind that the traffic between teams will only be possible after the first hour of the competition has passed. 
+                Also, services will only be installable once the CTF has started.
+                If you would like to test your network, you can always "<strong>nc -vv fd00:1337::1337 4242</strong>"! ICMP might or might not work, don't rely on it.
+            </p>
+            <img src="img/nw.png" style=" padding: 0; display: block; margin: 0 auto; max-height: 100%; max-width: 100%;">
+        </div>
+    </div>
+
+</div>
+{% endblock %}

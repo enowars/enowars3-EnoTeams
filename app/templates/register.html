@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+{% block content %}
+    <div class="content-subpage">
+
+        <h2 class="content-head is-center"><i class="fa fa-file-signature fa-lg"></i> Sign Up</h2>
+        <div class="pure-g">
+            <div class="pure-u-1 maxw-700 div-is-center">
+                {% include '_message.html' %}
+                {% if registration_disabled %}
+                    <p>Registration is closed.</p>
+                {% else %}
+                <form class="pure-form pure-form-stacked" action="{{url_for('page_register')}}" method="post">
+                    <fieldset>
+
+                        <label for="email">E-mail</label>
+                        <input id="email" name="email" type="email" placeholder="Your E-mail-Address"{% if email %} value="{{ email }}"{% endif %} required>
+
+                        <label for="password">Password (8 characters minimum)</label>
+                        <input id="password" name="password" type="password" placeholder="Your Password" minlength="8" required>
+
+                        <label for="team_name">Team Name</label>
+                        <input id="team_name" name="team_name" type="text" placeholder="Your Team Name"{% if team_name %} value="{{ team_name }}"{% endif %} minlength="4" maxlength="20" required>
+
+                        <label for="country_code">Country</label>
+                        <img id="flag_img">
+                        <select id="country_code" name="country_code" style="float: right;" onchange="onCountryCodeChange()" required>
+                            <option value="" disabled {% if not country %}selected{% endif %} hidden>Please Choose Your Country...</option>
+                            {% for country_option in countries %}
+                            <option value="{{ country_option['code'] }}"{% if country == country_option['code'] %}selected{% endif %}>{{ country_option['name'] }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="university">University (optional)</label>
+                        <input id="university" name="university" type="text" placeholder="Your University (optional)"{% if university %} value="{{ university }}"{% endif %} maxlength="70">
+
+                        <label for="captcha">CAPTCHA</label>
+                        <img src="data:image/png;base64,{{ captcha|safe }}" width="400" height="200">
+                        <input id="captcha" name="captcha" type="text" placeholder="The letters in the picture" required>
+                        <input name="captcha_token" type="hidden" value="{{ captcha_token }}">
+
+                        <button type="submit" class="pure-button">
+                            <i class="fa fa-file-signature fa-lg"></i> Sign Up
+                        </button>
+                    </fieldset>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <script>
+    function onCountryCodeChange(){
+        document.getElementById("flag_img").src = "../flags/"+ document.getElementById("country_code").value + ".svg";
+        document.getElementById("flag_img").style.height = "36px";
+        document.getElementById("flag_img").style.width = "48px";
+        document.getElementById("flag_img").style.margin = "4px 0";
+        document.getElementById("flag_img").style.borderTopLeftRadius = "4px";
+        document.getElementById("flag_img").style.borderBottomLeftRadius = "4px";
+        document.getElementById("country_code").style.width = "calc(100% - 48px)";
+        document.getElementById("country_code").style.borderTopLeftRadius = "0";
+        document.getElementById("country_code").style.borderBottomLeftRadius = "0";
+    }
+    {% if country %}onCountryCodeChange();{% endif %}
+    </script>
+{% endblock %}

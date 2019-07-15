@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="content-subpage">
+    <h2 class="content-head is-center">Downloads</h2>
+    <div class="pure-g">
+        <div class="pure-u-1 maxw-700 div-is-center">
+            {% if verified and active %}
+                <p>Public downloads are mirrored at <a href="https://static.enoflag.de/enowars3/" target="_blank">https://static.enoflag.de/enowars3/</a> and
+                on Google Drive: <a href="https://drive.google.com/file/d/1GG2XgUBCwFssZE66125qPynmulR7y0Vc/view" target="_blank">
+teamrouter.ova</a>, <a href="https://drive.google.com/file/d/1GN5QCESs35UVKTZd_ACy3zi3-z5p9B2o/view" target="_blank">teamtestvm.ova</a>, <a href="https://drive.google.com/file/d/1YhixqgRESbprTODxLaApNNcQNzt1LOus/view" target="_blank">vulnbox.ova.gpg</a>.</p>
+                <ul style="list-style: none;">
+                    {% if download_options['DOWNLOAD_CONFIG_ENABLED'] %}
+                        <li><i class="fa fa-download"></i>
+                            <a href="{{ url_for('download', file='vpn_config') }}">team{{ session[2] }}.conf</a>
+                        </li>
+                    {% endif %}
+                    {% if download_options['DOWNLOAD_KEY_ENABLED'] %}
+                        <li><i class="fa fa-download"></i>
+                            <a href="{{ url_for('download', file='key') }}">vm.key</a>
+                        </li>
+                    {% endif %}
+                    {% for file in files %}
+                        <li><i class="fa fa-download"></i>
+                            <a href="files/{{ file }}">{{ file }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="pure-alert pure-alert-warning">
+                    <span class="msg-type">Warning:</span>
+                    You have to verify your e-mail-address before you can download the necessary files to participate.<br>
+                    <a href="{{url_for('page_verify_mail')}}">Request new activation mail</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

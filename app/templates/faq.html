@@ -1,0 +1,89 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="content-subpage">
+
+    <h2 class="content-head is-center"><i class="fa fa-question-circle"></i> FAQ</h2>
+    <div class="pure-g">
+        <div class="pure-u-1 maxw-1000 div-is-center">
+            <h3 id="faq">Frequently Asked Questions</h3>
+            <h4 >How to contact the organizers?</h4>
+            <p>
+                You can send an email to <a href="mailto:mail@enowars.com">mail@enowars.com</a> or find us in <a target="_blank" href="https://webchat.freenode.net/">#ENOWARS</a> on Freenode, or try <a href="https://twitter.com/enoflag" target="_blank"> Twitter</a>!
+                We won't give you any information or hints on the challenges, though ;-)
+            </p>
+            <h4>Who organizes this CTF?</h4>
+            <p>
+                Team <a href="https://enoflag.de">ENOFLAG</a> and students from <a href="https://www.isti.tu-berlin.de/security_in_telecommunications/menue/overview/">SecT</a> at TU Berlin.
+            </p>
+            <h4>What is an Attack-Defense CTF?</h4>
+            <p>
+                See <a href="information.html">Information</a>.
+            </p>
+            <h4>Are the vulnboxes remotely hosted?</h4>
+            <p>
+                No! See below!
+            </p>
+            <h4>Do I need to host my own vulnbox?</h4>
+            <p>
+                YES! See <a href="vms.html">VMs</a>. We recommend a minimum host PC with 4 CPU cores and 8 GB of RAM.
+            </p>
+            <h4>How is the VPN realized?</h4>
+            <p>
+                We use OpenVPN 2.4.
+                When logged in, you can download your vpn config file <a href="downloads.html">here</a>.
+            </p>
+            <h4>Where do I download the vulnbox or other files?</h4>
+            <p>
+                When logged in, you can download all files you need <a href="downloads.html">here</a>.
+            </p>
+            <h4>What is the FLAG format?</h4>
+            <p>
+                Look out for the string "ENO" ;)
+            </p>
+            <h4>Where do I find the scoreboard?</h4>
+            <p>
+                <a href="http://scoreboard.enowars.com" target="_blank">scoreboard.enowars.com</a>
+            </p>
+            <h4>Will there be IPv4 connectivity in the game network?</h4>
+            <p>
+                NO. Just NO!
+            </p>
+            <h4>Do you support DNS?</h4>
+            <p>Because IPv6 can be intimidating at times. We gave every team and service it’s own domain. <br>
+If you feel to lazy to write down IPv6 addresses you can use the folowing domains.</p>
+            <table class="pure-table div-is-center">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>IP</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="pure-table-even">
+                    <td>gateway.enowars.com</td>
+                    <td>130.149.22.25</td>
+                </tr>
+                <tr>
+                    <td>flagbot.enowars.com</td>
+                    <td>fd00:1337::1337</td>
+                </tr>
+                <tr>
+                    <td>team&lt;teamid&gt;.enowars.com</td>
+                    <td>fd00:1337:[teamid]::2</td>
+                </tr>
+                <tr>
+                    <td>&lt;servicename&gt;.team&lt;teamid&gt;.enowars.com</td>
+                    <td>fd00:1337:[teamid]:[serviceprefix]::1</td>
+                </tr>
+                <tr>
+                    <td>&lt;servicename&gt;.&lt;teamname&gt;.enowars.com</td>
+                    <td>fd00:1337:[teamid]:[serviceprefix]::1</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

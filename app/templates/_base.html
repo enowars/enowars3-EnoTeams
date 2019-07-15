@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Attack/Defense CTF ENOWARS 3 on the 5th of July 2019 hosted by ENOFLAG and SecT of TU Berlin.">
+    <meta property="og:image" content="https://enowars.com/img/e3_tn.png" />
+    <meta property="og:image:secure_url" content="https://enowars.com/img/e3_tn.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="605" />
+    <meta property="og:image:height" content="320" />
+    <meta property="og:image:alt" content="ENOWARS 3 Logo" />
+    <title>ENOWARS 3 &rsaquo; Online Attack/Defense CTF &rsaquo; 5th of July 2019</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" href="css/pure.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/pure-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="css/pure-grids.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    {% block head %}{% endblock head %}
+</head>
+<body>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading glitch" href="{{url_for('page_index')}}">ENOWARS 3</a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="pure-menu-list menu">
+                <li class="pure-menu-item">
+                    <a href="https://scoreboard.enowars.com" class="pure-menu-link">Scoreboard</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="{{url_for('page_information')}}" class="pure-menu-link">Information</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="{{url_for('page_network')}}" class="pure-menu-link">Network</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="{{url_for('page_vms')}}" class="pure-menu-link">VMs</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="{{url_for('page_rules')}}" class="pure-menu-link">Rules</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="{{url_for('page_faq')}}" class="pure-menu-link">FAQ</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="{{url_for('page_teams')}}" class="pure-menu-link">Teams</a>
+                </li>
+                {% if session %}
+                    <li class="pure-menu-item">
+                        <a href="{{url_for('page_downloads')}}" class="pure-menu-link">Downloads</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a href="{{url_for('page_edit')}}" class="pure-menu-link">Profile</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <form action="{{url_for('page_logout')}}" method="post">
+                            <input type="submit" value="Log Out" class="nobutton">
+                        </form>
+                    </li>
+                {% else %}
+                    {% if not registration_disabled %}
+                        <li class="pure-menu-item">
+                            <a href="{{url_for('page_register')}}" class="pure-menu-link">Sign Up</a>
+                        </li>
+                    {% endif %}
+                    <li class="pure-menu-item">
+                        <a href="{{ url_for('page_login') }}" class="pure-menu-link">Log In</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div id="page-container">
+
+        {% block content %}{% endblock content %}
+
+        {% if self._TemplateReference__context.name != 'index.html' %}
+            {% include '_footer.html' %}
+        {% endif %}
+    </div>
+</body>
+</html>

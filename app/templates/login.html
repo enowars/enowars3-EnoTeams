@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="content-subpage">
+
+    <h2 class="content-head is-center"><i class="fa fa-sign-in-alt"></i> Log In</h2>
+    <div class="pure-g">
+        <div class="pure-u-1 maxw-700 div-is-center">
+            {% include '_message.html' %}
+            <div class="pure-alert pure-alert-info">
+                <span class="msg-type">Information:</span>
+                By logging in, you agree to the use of a session cookie to maintain your login state.
+                No tracking, no analytics, no ads.
+            </div>
+            <form class="pure-form pure-form-stacked" action="{{url_for('page_login')}}" method="post">
+                <fieldset>
+
+                    <label for="email">E-Mail</label>
+                    <input id="email" name="email" type="email" placeholder="Your E-Mail-Address"{% if email %} value="{{ email }}"{% endif %} required>
+
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Your Password" required>
+
+                    <button type="submit" class="pure-button"><i class="fa fa-sign-in-alt"></i> Log In</button>
+                </fieldset>
+            </form>
+            <p><a href="{{url_for('page_reset_password')}}">
+                <button class="pure-button button-small">
+                    <i class="fa fa-undo fa-lg"></i> Reset Password
+                </button>
+            </a></p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

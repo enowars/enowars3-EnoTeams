@@ -1,0 +1,79 @@
+{% extends "_base.html" %}
+{% block head %}
+<script type="text/javascript" src="./js/upload.js"></script>
+{% endblock head %}
+{% block content %}
+    <div class="content-subpage">
+
+        <h2 class="content-head is-center">Profile</h2>
+        <div class="pure-g">
+            <div class="pure-u-1 maxw-700 div-is-center">
+                {% include '_message.html' %}
+                {% if not verified %}
+                    <div class="pure-alert pure-alert-warning">
+                        <span class="msg-type">Warning:</span>
+                        E-mail-address is not verified.
+                        <a href="{{url_for('page_verify_mail')}}">Request new activation mail</a>
+                    </div>
+                {% endif %}
+                <form class="pure-form pure-form-stacked" action="{{url_for('page_edit')}}" method="post">
+                    <fieldset>
+
+                        <label>E-mail</label>
+                        <input id="email" name="email" type="email" placeholder="Your e-mail-address"
+                               value="{{ team_data[3] }}" required>
+
+                        <label for="team_name">Team Name</label>
+                        <input id="team_name" name="team_name" type="text" placeholder="Your Team Name"
+                               value="{{ team_data[0] }}"  minlength="4" maxlength="20" required>
+
+                        <label for="country_code">Country</label>
+                        <img id="flag_img">
+                        <select id="country_code" name="country_code" style="float: right;" onchange="onCountryCodeChange()" required>
+                            <option value="" disabled {% if not team_data[1] %}selected{% endif %} hidden>Please Choose Your Country...</option>
+                            {% for country in countries %}
+                            <option value="{{ country['code'] }}" {% if team_data[1] == country['code'] %}selected{% endif %}>{{ country['name'] }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="university">University (optional)</label>
+                        <input id="university" name="university" type="text" placeholder="Your University (optional)"
+                               {% if team_data[2] %} value="{{ team_data[2] }}"{% endif %} maxlength="70">
+
+                        <button type="submit" class="pure-button">Edit Profile</button>
+                    </fieldset>
+                </form>
+                {% if verified and active %}
+                <form class="pure-form pure-form-stacked" action="{{url_for('page_img_upload')}}" method="post">
+                    <div id="logo_err" class="hidden pure-alert pure-alert-error"></div>
+                    <fieldset>
+                        <label for="team_logo">Team Logo</label>
+			<span>Uploadable are .jpg, .png or .gif image files with up to 500kB and smaller than 400px on each side.</span><br/>
+                        {% if logo %}
+                        <img src="logo?img={{ logo }}">
+                        {% endif %}
+                        <input id="team_logo" name="team_logo" type="file" placeholder="Your Team Logo">
+
+                        <button type="button" onclick="logo_upload()" class="pure-button">Upload Team Logo</button>
+                    </fieldset>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function onCountryCodeChange(){
+            document.getElementById("flag_img").src = "../flags/"+ document.getElementById("country_code").value + ".svg";
+            document.getElementById("flag_img").style.height = "36px";
+            document.getElementById("flag_img").style.width = "48px";
+            document.getElementById("flag_img").style.margin = "4px 0";
+            document.getElementById("flag_img").style.borderTopLeftRadius = "4px";
+            document.getElementById("flag_img").style.borderBottomLeftRadius = "4px";
+            document.getElementById("country_code").style.width = "calc(100% - 48px)";
+            document.getElementById("country_code").style.borderTopLeftRadius = "0";
+            document.getElementById("country_code").style.borderBottomLeftRadius = "0";
+        }
+        {% if team_data[1] %}onCountryCodeChange();{% endif %}
+    </script>
+{% endblock %}

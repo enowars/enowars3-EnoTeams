@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="content-subpage">
+    <h2 class="content-head is-center"><i class="fa fa-users"></i> Teams</h2>
+    {% if users %}
+        <div class="div-is-center table-wrapper">
+    <table class="pure-table div-is-center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th colspan="2">Name</th>
+                <th colspan="2">Country</th>
+                <th>University</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set row_class = cycler('odd', 'even') %}
+            {% for user in users %}
+            <tr class="pure-table-{{ row_class.next() }}">
+                <td>{{ user['id'] }}</td>
+                <td style="padding: 0; line-height: 0; text-align: center;">
+                    {% if user['token'] %}
+                    <img src="logo?img={{ user['token'] }}" height="45px" style="max-width:300px;">
+                    {% endif %}
+                </td>
+                <td><div>{{ user['team_name'] }}</div></td>
+                <td style="padding: 0; line-height: 0;"><img src="../flags/{{ user['code'] }}.svg" height="45px"></td>
+                <td><div>{{ user['name'] }}</div></td>
+                <td>
+                    <div>
+                    {{ user['university'] }}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    {% else %}
+        <h3 class="is-center" style="margin-top:5em">No teams registered yet.</h3>
+    {% endif %}
+</div>
+{% endblock %}
