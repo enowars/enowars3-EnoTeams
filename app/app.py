@@ -243,18 +243,18 @@ def send_reset_mail_to(username):
 
     reset_pw = "Hello Team, \n" + \
                "you receive this email because a password reset on https://enowars.com was requested. \n" + \
-               "Please open this link to reset your ENOWARS 3 account password: {}/reset.html?token={} .\n".format(
+               "Please open this link to reset your ENOWARS 4 account password: {}/reset.html?token={} .\n".format(
                    app.config['APP_URL'], token) + \
                "If you did not request a new password, please ignore this email.\n \n"
 
     reset_pw_html = "<p>Hello Team, <br>" + \
                     "you receive this email because a password reset on <a href=\"https://enowars.com\">enowars.com</a> was requested. <br>" + \
-                    "Please open this link to reset your ENOWARS 3 account password: <a href=\"{}/reset.html?token={}\">Reset Password</a> .<br>".format(
+                    "Please open this link to reset your ENOWARS 4 account password: <a href=\"{}/reset.html?token={}\">Reset Password</a> .<br>".format(
                         app.config['APP_URL'], token) + \
                     "If you did not request a new password, please ignore this email.<br></p>\n"
 
     msg = Message(body=reset_pw + footer,
-                  subject="Reset Your ENOWARS 3 Account Password",
+                  subject="Reset Your ENOWARS 4 Account Password",
                   sender="mail@enowars.com",
                   recipients=[username],
                   html=reset_pw_html + footer_html)
@@ -272,16 +272,16 @@ def send_activate_mail_to(user_id, username):
 
     activate = "Hello Team, \n" + \
                "you receive this email because you created an account on https://enowars.com. \n" + \
-               "Please open this link to activate your ENOWARS 3 account: {}/verify.html?token={} .\n".format(app.config['APP_URL'], token) + \
+               "Please open this link to activate your ENOWARS 4 account: {}/verify.html?token={} .\n".format(app.config['APP_URL'], token) + \
                "If you did not create an account, please ignore this email.\n \n"
 
     activate_html = "<p>Hello Team, <br>" + \
                     "you receive this email because you created an account on <a href=\"https://enowars.com\">enowars.com</a>. <br>" + \
-                    "Please open this link to activate your ENOWARS 3 account: <a href=\"{}/verify.html?token={}\">Activate Account</a> .<br>".format(app.config['APP_URL'], token) + \
+                    "Please open this link to activate your ENOWARS 4 account: <a href=\"{}/verify.html?token={}\">Activate Account</a> .<br>".format(app.config['APP_URL'], token) + \
                     "If you did not create an account, please ignore this email.<br></p>\n"
 
     msg = Message(body=activate + footer,
-                  subject="Activate Your ENOWARS 3 Account",
+                  subject="Activate Your ENOWARS 4 Account",
                   sender="mail@enowars.com",
                   recipients=[username],
                   html=activate_html + footer_html)
