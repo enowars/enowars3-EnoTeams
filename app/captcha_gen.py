@@ -41,7 +41,7 @@ def generate_captcha(text=None, image_width=400, image_height=200, font_height=4
     else:
         text = text.upper()
 
-    fnt = ImageFont.truetype("GlitchCity.ttf", font_height)
+    fnt = ImageFont.truetype("Lobster.ttf", font_height)
     text_width = fnt.getsize(text)[0]
 
     if text_width > image_width - 20:
