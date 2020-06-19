@@ -1,5 +1,6 @@
 import base64
 import io
+from time import sleep
 from os import listdir
 from os.path import isfile
 
@@ -497,10 +498,22 @@ def generate_captcha_n_save_token():
 
 # can't use flask global connect_db here because it is not a flask context yet
 def init_db():
-    try:
-        connection = psycopg2.connect(**db_conf)
-        cursor = connection.cursor()
+    tries = 0
+    while tries < 5:
+        try:
+            connection = psycopg2.connect(**db_conf)
+            cursor = connection.cursor()
+            break
+        except (Exception, psycopg2.Error) as e:
+            print(f"Error connection to db: {e}")
+        tries += 1
+        sleep(3)
+    if tries == 5:
+        print("Couldn't connection to db")
+        exit()
 
+
+    try:
         c = connection.cursor()
         c.execute("CREATE TABLE IF NOT EXISTS users (id SERIAL UNIQUE, username TEXT NOT NULL UNIQUE, salt TEXT NOT NULL, hash TEXT NOT NULL, \
                         team_name TEXT NOT NULL UNIQUE, country TEXT, university TEXT, \
