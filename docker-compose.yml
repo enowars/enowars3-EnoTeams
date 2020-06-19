@@ -32,7 +32,9 @@ services:
   postgres:
     image: postgres
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+        # - ./postgres_data:/var/lib/postgresql/data
+        # Yes, this is a fix ..
+      - ./postgres_data:/var/lib/postgresql/enodata
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
