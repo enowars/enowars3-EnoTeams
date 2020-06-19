@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .glitch {
-    font-family: 'Arial Black';
+    font-family: 'Lobster', cursive;
     /*
     If you want to use the original font design, purchase the font "Glitch City".
     */
@@ -32,7 +34,7 @@
 }
 
 .logo a:hover {
-    background: black;
+    background: transparent;
 }
 
 .maxw-700 {
@@ -164,6 +166,10 @@ body {
     color: #7f8c8d;
     font-size: 16px;
     font-family: monospace;
+    /* Does nothing right now */
+    background-image: url("umbrella.jpg");
+    background-position: right bottom; /*Positioning*/
+    background-repeat: no-repeat;
 }
 
 h1,
@@ -178,24 +184,24 @@ label {
 
 a, a:visited {
     text-decoration: none;
-    background-color: black;
+    background-color: transparent;
     color: white;
 }
 
 a:hover {
-    background-color: white;
-    color: black;
+    background-color: transparent;
+    color: white;
 }
 
 .ribbon a,
 .ribbon a:visited {
     text-decoration: none;
-    background-color: white;
+    background-color: #00baa0;
     color: black;
 }
 
 .ribbon a:hover {
-    background-color: black;
+    background-color: #00baa0;
     color: white;
 }
 
@@ -298,7 +304,7 @@ a.pure-button-primary {
 }
 
 .home-menu {
-    background: black;
+    background: #0198a0;
 }
 
 .pure-menu.pure-menu-fixed {
@@ -310,7 +316,7 @@ a.pure-button-primary {
 
 .home-menu .pure-menu-heading {
     color: white;
-    background: black;
+    background: #fc9f00;
     font-weight: 400;
     font-size: 120%;
 }
@@ -340,7 +346,7 @@ a.pure-button-primary {
  */
 
 .splash-container {
-    background: black;
+    background: lightblue;
     z-index: 1;
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
@@ -366,12 +372,12 @@ a.pure-button-primary {
 .splash a {
     text-decoration: none;
     color: black;
-    background: white;
+    background: #00baa0;
 }
 
 .splash a:hover {
     color: white;
-    background: black;
+    background: #00baa0;
 }
 
 .justify:after { /* Justify last line */
@@ -439,7 +445,7 @@ a.pure-button-primary {
     width: 100%;
     min-height: 12%;
     z-index: 2;
-    background: white;
+    background: #ffda7d;
 
 }
 
@@ -450,6 +456,7 @@ a.pure-button-primary {
 
 .content-subpage {
     padding: 4em;
+    background: lightblue;
 }
 
 /* This is the class used for the main content headers (<h2>) */
@@ -476,8 +483,8 @@ a.pure-button-primary {
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
-    background: black;
-    color: #aaa;
+    background: lightblue;
+    color: black;
 }
 
 .justify-content {
@@ -501,7 +508,7 @@ a.pure-button-primary {
 
 /* This is the class used for the footer */
 .footer {
-    background: black;
+    background: #0198a0;
     position: absolute;
     bottom: 0;
     width: 100%;
