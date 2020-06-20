@@ -266,7 +266,7 @@ a:hover {
  * I want my pure-button elements to look a little different
  */
 .pure-button {
-    background-color: black;
+    background-color: #fc9f00;
     color: white;
     padding: 0.5em 2em;
     border-radius: 5px;
@@ -458,8 +458,8 @@ a.pure-button-primary {
     padding: 4em;
     background: lightblue;
     background-repeat: no-repeat;
-    padding-bottom: 48%;
-    background-image: url('../img/umbrella_material.png');
+    min-height:100vh;
+    background-image: url('../img/umbrella_material_opacity60.png');
 }
 
 /* This is the class used for the main content headers (<h2>) */
@@ -645,7 +645,7 @@ a.pure-button-primary {
 }
 
 .header .menu-btn:checked ~ .menu {
-    background: white;
+    background: #add8e6;
     width: 100%;
     max-height: 100vh;
     border-bottom: 3px solid black;
@@ -803,6 +803,7 @@ code {
         top: 10px;
         float: right;
         margin: 20px;
+        background: #add8e6;
     }
 
     .pure-menu-item {
@@ -817,7 +818,7 @@ code {
 
     .pure-menu-item a,
     .pure-menu-item input[type="submit"] {
-        background: white;
+        background: #fc9e00;
         color: black;
         width: 100%;
     }

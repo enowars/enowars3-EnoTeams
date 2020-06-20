@@ -5,28 +5,34 @@
     <h2 class="content-head is-center"><i class="fa fa-network-wired"></i> Network</h2>
     <div class="pure-g">
         <div class="pure-u-1 maxw-1000 div-is-center">
-            <h2>Outdated</h2>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p>
-                .... there's only IPv6, which nobody understands nor knows how to use. Without getting used to it, you won't have a chance on this planet anymore.
-            </p>
+            <p>The internet is a vast space where you can find many wonderful things. How about a vacation at a beautiful resort? Here's how you get there:</p>
             <h4>Network IPs</h4>
+            <p>The translation formula from team-id to IP is:<br>
+                TeamIp(X): X -> 10. ( X // 256 ) . ( X % 256 ) .1
+            </p>
             <p>
-                Here are some important IPs that you might need:
-
                 <ul>
-                    <li><strong>fd00:1337::1337</strong> - The gameserver where you can submit flags to on port <strong>1337</strong>. To test your network connection, netcat port <strong>4242</strong>.</li>
-                    <li><strong>fd00:1337:X::/48</strong> - Team X's own subnet, where their services are accessible and your team member's systems should reside.</li>
-                    <li><strong>fd00:1337:X:Y::Z/64</strong> - Team X's service has its own /64 subnet Y, where its dockerized containers have IP Z.</li>
+                    <li><strong>10.0.1.1</strong>team1.enowars.com</li>
+                    <li><strong>10.0.2.1</strong>team2.enowars.com</li>
+                    <li>...</li>
+                    <li><strong>10.0.255.1</strong>team511.enowars.com</li>
+                    <li><strong>10.2.0.1</strong>team512.enowars.com</li>
                 </ul>
             </p>
-            <h4>Routing</h4>
+
+            <p>
+                Some important IPs that you might need:
+
+                <ul>
+                    <li><strong>10.0.0.2:1337</strong> - The Flagbot where you can submit flags to on port <strong>1337</strong>.</li>
+                    <li><strong>49.12.115.199</strong> - The game Router you will use for routing.</li>
+                    <li><strong>10.0.0.2:80</strong> - The current score for every team participating the ctf</li>
+                </ul>
+            </p>
+            <!--h4>Routing</h4>
             <p>
                 We will only route the <strong>fd00:1337::/32</strong> within our game (VPN) network. No public connections over our game router will be possible.
-            </p>
+            </p-->
             <h4>VPN</h4>
             <p>
                 The whole competition will take place within a VPN. It will be based on OpenVPN 2.4. and use IPv4 to connect to our OpenVPN instances. 
@@ -34,9 +40,9 @@
 
                 Keep in mind that the traffic between teams will only be possible after the first hour of the competition has passed. 
                 Also, services will only be installable once the CTF has started.
-                If you would like to test your network, you can always "<strong>nc -vv fd00:1337::1337 4242</strong>"! ICMP might or might not work, don't rely on it.
+                If you would like to test your network, you can always ???.
             </p>
-            <img src="img/nw.png" style=" padding: 0; display: block; margin: 0 auto; max-height: 100%; max-width: 100%;">
+            <img src="img/nw-e4.png" style=" padding: 0; display: block; margin: 0 auto; max-height: 100%; max-width: 100%;">
         </div>
     </div>
 

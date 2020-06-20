@@ -20,7 +20,7 @@
             </p>
             <h4>Rule #3: Prices</h4>
             <p>
-               There will be a <strong>512€</strong> reward for the first place!
+               ???
             </p>
             <h4>Rule #4: The scoring formula</h4>
             <p>
@@ -33,10 +33,19 @@
             </p>
             <h4>Rule #6: Flag submission</h4>
             <p>
-                You can submit your flags at <strong>10.0.0.2</strong> on port <strong>1337</strong>.
+                The Flagsubmission is done via a tcp connection to host <strong>49.12.115.199</strong> on port <strong>1337</strong>. There you can just send the flag or multiple flags delimited by \n characters. Each Flag will be checked by the backend and then a message is returned picked by this code:
+                <ul>
+                    <li>FlagSubmissionResult.Ok => "VALID: Flag accepted!",</li>
+                    <li>FlagSubmissionResult.Invalid => "INVALID: You have submitted an invalid string!",</li>
+                    <li>FlagSubmissionResult.Duplicate => "RESUBMIT: You have already sent this flag!",</li>
+                    <li>FlagSubmissionResult.Own => "OWNFLAG: This flag belongs to you!",</li>
+                    <li>FlagSubmissionResult.Old => "OLD: You have submitted an old flag!",</li>
+                    <li>FlagSubmissionResult.UnknownError => "ERROR: An unexpected error occured :(",</li>
+                    <li>FlagSubmissionResult.InvalidSenderError => "ILLEGAL: Your IP address does not belong to any team's subnet!",</li>
+                    <li>FlagSubmissionResult.SpamError => "SPAM: You should send 1 flag per line!",</li>
+                </ul>
             </p>
         </div>
     </div>
-
 </div>
 {% endblock %}
