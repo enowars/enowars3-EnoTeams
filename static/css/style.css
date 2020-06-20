@@ -163,11 +163,11 @@
  */
 body {
     line-height: 1.7em;
-    color: #7f8c8d;
+    color: white;
     font-size: 16px;
     font-family: monospace;
     /* Does nothing right now */
-    background-image: url("umbrella.jpg");
+    /*background-image: url("../img/umbrella_material.png");*/
     background-position: right bottom; /*Positioning*/
     background-repeat: no-repeat;
 }
@@ -457,6 +457,9 @@ a.pure-button-primary {
 .content-subpage {
     padding: 4em;
     background: lightblue;
+    background-repeat: no-repeat;
+    padding-bottom: 48%;
+    background-image: url('../img/umbrella_material.png');
 }
 
 /* This is the class used for the main content headers (<h2>) */
