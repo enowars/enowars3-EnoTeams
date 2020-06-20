@@ -289,6 +289,7 @@ a.pure-button-primary {
 
 .pure-g [class*="pure-u"] {
     font-family: monospace;
+    color: black;
 }
 
 /*
