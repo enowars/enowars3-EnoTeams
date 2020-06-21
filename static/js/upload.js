@@ -9,9 +9,9 @@ function logo_upload() {
         return
     }
 
-    if (file.size > (100 * 1024)) {
+    if (file.size > (500 * 1024)) {
         document.getElementById("logo_err").classList.remove("hidden")
-        document.getElementById("logo_err").innerHTML = '<span class="msg-type">Error:</span> Image exceeds 100kB'
+        document.getElementById("logo_err").innerHTML = '<span class="msg-type">Error:</span> Image exceeds 500kB'
         return
     }
 
