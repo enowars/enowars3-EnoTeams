@@ -68,7 +68,7 @@ def send_all(body, subject):
         x = 0
         for email in emails:
             # Note that type(email) must be list too
-            msg = Message(body=body
+            msg = Message(body=body,
                           subject=subject,
                           sender="mail@enowars.com",
                           recipients=email)
