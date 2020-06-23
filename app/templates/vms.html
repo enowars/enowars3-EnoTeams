@@ -5,88 +5,23 @@
         <h2 class="content-head is-center"><i class="fa fa-desktop"></i> VMs</h2>
         <div class="pure-g">
             <div class="pure-u-1 maxw-1000 div-is-center">
-                <h1>Outdated</h1>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <h1>You are on your own...</h1>
-                <p>
-                    The organizers will provide several VMs that each team needs to host on its own. You will receive
-                    the VMs as <strong>".ova"</strong> files that are import-ready for VirtualBox. We suggest using
-                    VirtualBox, but you are obviously free to choose any other hypervisor without any support from the
-                    organizers.
-                </p>
-                <h2>The VMs in general</h2>
-                <h3>Teamrouter</h3>
-                <p>
-                    The teamrouter is a debian-based VM that will act as the router for your team. It will connect to
-                    our gameserver using a IPv4-OpenVPN tunnel and provide a IPv6 network on your end for your team. It
-                    is your team's entry point to the game network.
-
-                    It has the IP address <strong>fd00:1337:X::1</strong> where X is your team ID (see <a href="teams.html"> enowars.com/teams</a>).
-
-                    You can download the VM before the CTF starts to test your setup.
-                </p>
-                <h3>Teamtestvm</h3>
-                <p>
-                    This VM can be used before the CTF starts to install and test your setup. In the CTF it will be replaced by the vulnbox VM.
-                    The VM is therefore structured similarly to the actual vulnbox and also Debian based. 
-                    It has the IP address <strong>fd00:1337:X::3</strong> where X is your team ID.
-
-                    To test your setup the <strong>"echod"</strong> service can be used. 
-                    It listens on <strong>fd00:1337:X:ecc0::1</strong>, port <strong>1337</strong> and needs to be reachable by the game engine.
-                    You need to reach the game engine on <strong>fd00:1337::1337</strong>, port <strong>4242</strong>.
-                    You can use the following netcat command to test this: 
-                </p>
-                <div class="code-block">
-                    <code>nc -6 -vv fd00:1337::1337 4242</code>
-                </div>
-                <p>
-                    <strong>Disclaimer:</strong> If your DNS does not seem to work and you see `130.149.X.X` IPs in your /etc/resolv.conf, 
-                    please replace those IPs with DNS servers of your choice (e.g. 8.8.8.8 or 1.1.1.1).
-                </p>
-                <p>
-                    In order to enable your team members to access the gamenetwork and the teamtestvm/vulnbox from their respective PCs there are two network interfaces used.
-                    One configured as NAT to the host and one (bridged) to the gamenetwork. 
-                    Internet connectivity (v4) for the VM should be provided over the first interface through the host. 
-                    It can also be configured to use port forwarding to give you access to the VM. 
-                    The latter interface connects the teamrouter + other VMs and yourself with the game network.
-
-                    How to do that is explained below under <strong>"Bridging the network"</strong>.
-                    Remember to setup the two interfaces if you decide to use the VM as <strong>qemu, qcow, ...</strong>.
-                    This applies to the vulnbox as well.
-                </p>
-
-                <h3>Vulnbox</h3>
+                <h1>Get around the resort.</h1>
+                    The resort is marvellous! Come and take at tour at the different places that can be discovered here. We call these places VMs. 
+                    No questions, please. Here, we want to introduce you to the Vulnbox VM.
+                <h2>Vulnbox</h2>
                 <p>
                     This is the most important VM on which your part of the game will take place. You'll get a bunch of
-                    services that you need to defend and find security vulnerabilities to attack other teams.
-
-                    It has the IP address <strong>fd00:1337:X::2</strong> where X is your team ID.
-
-                    You can download the <strong>encrypted</strong> VM before the CTF starts. The decryption key will be released
-                    the minute the CTF starts, so that all teams have the same chances to start analyzing the services.
+                    services that you need to defend and find security vulnerabilities to attack other teams. You can find
+                    the IP address of your team on the <a href="/network.html"> network tab</a>.
+                    The Vulnbox can bei either <strong> hosted by yourself </strong> or <strong> provided to you by us</strong>. 
+                    See the instructions below for further details.
                 </p>
-                <strong>We recommend a host PC with at least 4 CPU cores and 8 GB of RAM.</strong>
 
-
-                <h4>Vulnbox - Service Installation</h4>
+                <h3>Vulnbox - Service Interaction</h3>
                 <p>
-                    All services are shipped as debian package and managed through APT.
-                    They can be installed and updated through our APT repository. We will open the firewall to the APT repository once the game starts.
-                    With an established connection to the network use the following commands to install all services:
-                </p>
-                <div class="code-block">
-                    <code>apt-get update
-                        apt-get install -y servicename
-                        </code>
-                </div>
-
-                <h4>Vulnbox - Service Interaction</h4>
-                <p>
-                    The services run in their own docker container and are started via docker-compose. We have also included a systemd file for docker that lets you monitor and control the services. You can use systemctl to start/stop/restart/inspect a given service respectively:
+                    The services run in their own docker container and are started via docker-compose. We have also included a systemd 
+                    file for docker that lets you monitor and control the services. You can use systemctl to start/stop/restart/inspect 
+                    a given service respectively:
                 </p>
                 <div class="code-block">
                     <code>systemctl {start|stop|restart|status} dc@servicename</code>
@@ -97,102 +32,17 @@
                 <div class="code-block">
                     <code>journalctl -u servicename</code>
                 </div>
-
-                <h2>Hosting your VMs</h2>
-                <p>
-                    First of all, you need to download the images:
-                    <br>
-                </p>
-
-                <div class="code-block">
-                    <code>wget http://enowars.com/files/teamrouter.ova
-                        wget http://enowars.com/files/teamtestvm.ova
-                        wget http://enowars.com/files/vulnbox.ova.gpg</code>
-                </div>
-                <p>
-                    Once that is done, ensure that VirtualBox is installed and that you can run "VBoxManage"!
-                    If so, you can proceed with importing the VMs. But first have a look at the settings using
-                    "--dry-run":
-                </p>
-                <div class="code-block">
-                    <code>VBoxManage import --dry-run teamrouter.ova
-                        VBoxManage import --dry-run teamtestvm.ova
-                    </code>
-                </div>
-                <p>There are ways to change all those values (e.g. RAM, CPU) using VBoxManage, but that is left as an
-                    exercise to the motivated reader.</p>
-                <div class="code-block">
-                    <code>VBoxManage import teamrouter.ova
-                        VBoxManage import teamtestvm.ova
-                        [...]
-                        0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-                        Successfully imported the appliance.
-                    </code>
-                </div>
-                <p>In order to ssh into the vulnbox we configure port forwarding from the host's port <strong>"2222"/"2233"</strong> to the VM's port <strong>"22"</strong>. </p>
-                <div class="code-block">
-                    <code>VBoxManage modifyvm "teamrouter" --natpf1 "guestssh,tcp,,2222,,22"
-                        VBoxManage modifyvm "teamtestvm" --natpf1 "guestssh,tcp,,2233,,22"
-                    </code>
-                </div>
-                <p>To start the VM, run:</p>
-                <div class="code-block">
-                    <code>VBoxManage startvm "teamrouter" --type headless
-                        VBoxManage startvm "teamtestvm" --type headless
-                    </code>
-                </div>
-                <p>You should be able to login into the VMs now (user: root, password: root). For the teamrouter use port
-                    2222 and for the teamtestvm use 2233:</p>
-                <div class="code-block">
-                    <code>ssh -p2222 root@localhost
-                        [...]
-                        root@teamrouter:~#
-                    </code>
-                </div>
-                <p>Before you run anything, you need to upload the 
-                    content of your VPN configuration file (teamX.conf) to the 
-                    teamrouter and move it to "/etc/openvpn/client/game.conf". 
-
-                    Example: 
-                </p>
-                <div class="code-block">
-                    <code>scp -P 2222 teamX.conf teamrouter:/etc/openvpn/game.conf
-                    </code>
-                </div>
-                <p>
-                    Attention: Don’t change the name of the game.conf file!
+                
+                <h3>Vulnbox provisioning</h3>
+                <h4>Relax and let us do the job</h4>
+                    Lay down on one of our nice pool loungers and put your feet up, we will take care of setting everything up for you. As soon as the 
+                    game starts, we will have a nice and ready machine at your disposal, it will be all yours. Everything will be connected and ready to exploit.
                     
-                    The final step is to configure the networks on both VMs. Run the same command on both VMs! The
-                    script takes two arguments. The teamid and the 2nd-interface, which is the connection between both
-                    VMs and the gamenetwork. </p>
-                <div class="code-block">
-                    <code>root@teamrouter:~# network-setup X enp0s8
-                        Configuring network for team X
-
-                        root@teamtestvm:~# network-setup X enp0s8
-                        #########
-                        # Configuring network for team X
-                        [...]
-                    </code>
-                </div>
-                <p>To test your network connection, contact the game server on port 4242</p>
-                <div class="code-block">
-                    <code>root@teamrouter:~# nc -vv fd00:1337::1337 4242
-                        Connection to fd00:1337::1337 4242 port [tcp/*] succeeded!
-                        enowars!
-                    </code>
-                </div>
-                <p>To test your local connection, curl your echod service: (replace X with your team ID)</p>
-                <div class="code-block">
-                    <code>root@teamrouter:~# curl http://[fd00:1337:X:ecc0::1]:1337
-                        works!
-                    </code>
-                </div>
-
-                <p>
-                    Now you are ready to take part in the CTF!
-                </p>
-                <h3>Bridging the network</h3>
+                <h4>Bring your own</h4>
+                    You don't trust us? You think you can do better than we do? Then feel free to bring your own Gear. <br>
+                    We will announce how to install all necessary components on your own machine soon.
+                
+                <h2>Bridging the network</h2>
                 <p>
                     If you want to provide internet access to other systems than the testvm and vulnbox, then you most
                     likely want to bridge it to another real interface. This is not required to play the CTF, but might
