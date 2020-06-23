@@ -1,18 +1,20 @@
 import base64
+import hashlib
 import io
+import re
+import secrets
 from time import sleep
 from os import listdir
 from os.path import isfile
 
+from configparser import ConfigParser
 from flask import Flask, request, render_template, redirect, abort, g, make_response, send_from_directory, jsonify
 from flask_mail import Mail, Message
-from configparser import ConfigParser
-import secrets
-import hashlib
-import re
 import psycopg2, psycopg2.extras
 from PIL import Image
+
 from captcha_gen import generate_captcha
+from team_mail import get_emails
 
 app = Flask(__name__)
 app.config.from_pyfile('flask.cfg', silent=True)
@@ -1279,7 +1281,11 @@ def export_teams():
         abort(404)
 
     if password != app.config['EXPORT_PASSWORD']:
-        abort(404)
+        if password == app.config['MAILS_PASSWORD']:
+            emails = get_emails()
+            return jsonify({"emails": emails})
+        else:
+            abort(404)
 
     connection = get_db()
     c = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -1290,7 +1296,7 @@ def export_teams():
     for user in users:
         user["Id"] = user.pop("id")
         user["Name"] = user.pop("team_name")
-        user["TeamSubnet"] = "fd00:1337:" + str(user["Id"]) + "::"
+        user["TeamSubnet"] = "::ffff:10.0.0." + str(user["Id"])
         university = user.pop("university")
         if university:
             user["University"] = university
@@ -1300,11 +1306,11 @@ def export_teams():
         user["Country"] = {
             "Code": country_code,
             "Name": user.pop("name"),
-            "FlagUrl": request.url_root + "flags/" + country_code + ".svg"
+            "FlagUrl": request.url_root.replace("http", "https") + "flags/" + country_code + ".svg"
         }
         logo_token = user.pop("token")
         if logo_token:
-            user["LogoUrl"] = request.url_root + "logo?img=" + logo_token
+            user["LogoUrl"] = request.url_root.replace("http", "https") + "logo?img=" + logo_token
         else:
             user["LogoUrl"] = None
 
