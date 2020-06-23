@@ -12,11 +12,11 @@
             </p>
             <p>
                 <ul>
-                    <li><strong>10.0.1.1</strong>team1.enowars.com</li>
-                    <li><strong>10.0.2.1</strong>team2.enowars.com</li>
+                    <li><strong>10.0.1.1</strong> - team1.enowars.com</li>
+                    <li><strong>10.0.2.1</strong> - team2.enowars.com</li>
                     <li>...</li>
-                    <li><strong>10.0.255.1</strong>team511.enowars.com</li>
-                    <li><strong>10.2.0.1</strong>team512.enowars.com</li>
+                    <li><strong>10.0.255.1</strong> - team511.enowars.com</li>
+                    <li><strong>10.2.0.1</strong> - team512.enowars.com</li>
                 </ul>
             </p>
 
@@ -29,14 +29,20 @@
                     <li><strong>10.0.0.2:80</strong> - The current score for every team participating the ctf</li>
                 </ul>
             </p>
-            <!--h4>Routing</h4>
+            <h4>Routing</h4>
             <p>
-                We will only route the <strong>fd00:1337::/32</strong> within our game (VPN) network. No public connections over our game router will be possible.
+                We will only route the <strong>10.0.0.0/8</strong> within our game (VPN) network. No public connections over our game router will be possible™️.
             </p-->
             <h4>VPN</h4>
             <p>
-                The whole competition will take place within a VPN. It will be based on OpenVPN 2.4. and use IPv4 to connect to our OpenVPN instances. 
-                You can download your team's VPN configuration after signing up on this website. 
+                The whole gamenetwork is connected via Wireguard. If you don't want to host a vulnbox yourself that shouldn't bother you.
+
+                You as a team are able to connect to the vulnbox via ssh and OpenVPN.
+                After connected via OpenVPN, you should be able to access the gamenet. So you can exploit locally. ;)
+
+                You can download both VPN configurations after signing up on this website.
+                <h4>The Wireguard Config will be up at ??? </h4>
+                <h4> The OpenVPN config gets generated at boottime of your vulnbox sooo </h4>
 
                 Keep in mind that the traffic between teams will only be possible after the first hour of the competition has passed. 
                 Also, services will only be installable once the CTF has started.
