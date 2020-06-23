@@ -54,30 +54,47 @@ text_html = "<p>Hello Team, <br>" + \
 "Sign in and check <a href=\"https://enowars.com/downloads.html\">https://enowars.com/downloads.html</a> .<br>"+ \
 "Feel free to reach out to us if you have any questions.<br></p>\n"
 
+def send_all(body, subject):
+    with app.app_context():
+        connection = psycopg2.connect(**db_conf)
+        cursor = connection.cursor()
 
-with app.app_context():
-    connection = psycopg2.connect(**db_conf)
-    cursor = connection.cursor()
+        c = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        c.execute("SELECT users.username FROM users WHERE mail_verified = 't';")
+        emails = c.fetchall()
 
-    c = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    c.execute("SELECT users.username FROM users;")
-    emails = c.fetchall()
+        assert len(emails) > 0
+        assert type(emails) == list
+        x = 0
+        for email in emails:
+            # Note that type(email) must be list too
+            msg = Message(body=body
+                          subject=subject,
+                          sender="mail@enowars.com",
+                          recipients=email)
 
-    len(emails)
-    x = 0
-    for email in emails:
-        msg = Message(body=text + footer,
-                      subject=subject,
-                      sender="mail@enowars.com",
-                      recipients=email)
+            try:
+                mail.send(msg)
+            except Exception as ex:
+                print("Exception in send for team: " + email[0])
+                print(ex)
+            finally:
+                x+=1
+                print ("Team: " + email[0] + " done. "+ str(x) +" out of " + str(len(emails)))
+                print("Delay because otherwise mail provider thinks I am spamming.")
+                time.sleep(5)
 
-        try:
-            mail.send(msg)
-        except Exception as ex:
-            print("Exception in send for team: " + email[0])
-            print(ex)
-        finally:
-            x+=1
-            print ("Team: " + email[0] + " done. "+ str(x) +" out of " + str(len(emails)))
-            print("Delay because otherwise mail provider thinks I am spamming.")
-            time.sleep(5)
+def get_emails():
+    with app.app_context():
+        connection = psycopg2.connect(**db_conf)
+        cursor = connection.cursor()
+
+        c = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        c.execute("SELECT users.username FROM users WHERE mail_verified = 't';")
+        emails = c.fetchall()
+
+        # Flatten the curv... ehh list!
+        emails = [y for x in emails for y in x]
+        assert len(emails) > 0
+        assert type(emails) == list
+        return emails
