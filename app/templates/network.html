@@ -19,13 +19,12 @@
                     <li><strong>10.2.0.1</strong> - team512.enowars.com</li>
                 </ul>
             </p>
-
             <p>
                 Some important IPs that you might need:
 
                 <ul>
                     <li><strong>10.0.0.2:1337</strong> - The Flagbot where you can submit flags to on port <strong>1337</strong>.</li>
-                    <li><strong>49.12.115.199</strong> - The game Router you will use for routing.</li>
+                    <li><strong>10.0.0.1</strong> - The game Router you will use for routing.</li>
                     <li><strong>10.0.0.2:80</strong> - The current score for every team participating the ctf</li>
                 </ul>
             </p>
@@ -34,12 +33,13 @@
                 We will only route the <strong>10.0.0.0/8</strong> within our game (VPN) network. No public connections over our game router will be possible™️.
             </p-->
             <h4>VPN</h4>
+            <img src="img/nw-e4.png" style="padding: 10px; border-radius: 20px; margin: auto;">
             <p>
                 The whole gamenetwork is connected via Wireguard. If you don't want to host a vulnbox yourself that shouldn't bother you.
 
                 You as a team are able to connect to the vulnbox via ssh and OpenVPN.
                 After connected via OpenVPN, you should be able to access the gamenet. So you can exploit from your machine. ;)
-
+                    
                 You can download both VPN configurations after signing up on this website.
                 <h4>The Wireguard Config will be up at ??? </h4>
                 <h4> The OpenVPN config gets generated at boottime of your vulnbox sooo </h4>
@@ -47,8 +47,7 @@
                 Keep in mind that the traffic between teams will only be possible after the first hour of the competition has passed. 
                 Also, services will only be installable once the CTF has started.
                 If you would like to test your network, you can always ???.
-            </p>
-            <img src="img/nw-e4.png" style=" padding: 0; display: block; margin: 0 auto; max-height: 100%; max-width: 100%;">
+            </p>      
         </div>
     </div>
 
