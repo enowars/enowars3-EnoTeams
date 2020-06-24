@@ -1289,7 +1289,7 @@ def export_teams():
 
     connection = get_db()
     c = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    c.execute("SELECT users.id, users.team_name, users.university, countries.code, countries.name, images.token FROM users JOIN countries ON countries.code = users.country LEFT JOIN images on images.user_id = users.id WHERE users.mail_verified and users.active;")
+    c.execute("SELECT users.id, users.team_name, users.university, countries.code, countries.name, images.token FROM users JOIN countries ON countries.code = users.country LEFT JOIN images on images.user_id = users.id WHERE users.mail_verified and users.active ORDER BY id ASC;")
     users = c.fetchall()
 
     # transform keys to gameengine style
