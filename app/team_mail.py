@@ -55,19 +55,11 @@ text_html = "<p>Hello Team, <br>" + \
 "Feel free to reach out to us if you have any questions.<br></p>\n"
 
 def send_all(body, subject):
-    with app.app_context():
-        connection = psycopg2.connect(**db_conf)
-        cursor = connection.cursor()
-
-        c = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        c.execute("SELECT users.username FROM users WHERE mail_verified = 't';")
-        emails = c.fetchall()
-
-        assert len(emails) > 0
-        assert type(emails) == list
+        emails = get_emails()
         x = 0
         for email in emails:
-            # Note that type(email) must be list too
+            # recipients needs to be type list
+            email = [email]
             msg = Message(body=body,
                           subject=subject,
                           sender="mail@enowars.com",
