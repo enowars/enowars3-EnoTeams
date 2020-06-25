@@ -40,44 +40,9 @@
                     
                 <h4>Bring your own</h4>
                     You don't trust us? You think you can do better than we do? Then feel free to bring your own Gear. <br>
-                    We will announce how to install all necessary components on your own machine soon.
+                    <i> We will announce how to install all necessary components on your own machine soon. </i>  <br>  <br>  <br>
                 
-                <h2>Bridging the network</h2>
-                <p>
-                    If you want to provide internet access to other systems than the testvm and vulnbox, then you most
-                    likely want to bridge it to another real interface. This is not required to play the CTF, but might
-                    make things easier for you. <strong>WE DO NOT SUPPORT THIS</strong>, so please fix bugs and errors yourself.
-<br>
-                    NOTE: You most likely need a 2nd interface on the host system for that.
-
-                    First, shutdown the VMs:
-                <div class="code-block">
-                    <code>VBoxManage shutdown teamrouter
-                        VBoxManage shutdown teamtestvm
-                    </code>
-                </div>
-                <p>Then configure a bridged adapter and restart the VMs and rerun the configuration (replace eth0 with
-                    your host ethernet)</p>
-                <div class="code-block">
-                    <code>VBoxManage modifyvm "teamrouter" --nic2 bridged --nictype2 virtio --bridgeadapter2 eth0
-                        VBoxManage modifyvm "teamtestvm" --nic2 bridged --nictype2 virtio --bridgeadapter2 eth0
-
-                        VBoxManage startvm "teamrouter" --type headless
-                        VBoxManage startvm "teamtestvm" --type headless
-
-                        root@teamrouter:~# network-setup 20 enp0s8 eth0
-                        root@teamtestvm:~# network-setup 20 enp0s8 eth0
-                    </code>
-                </div>
-                <p>
-                    Now you should be able to connect other systems to the 2nd ethernet device (eth0). <br>
-                    On your other systems give an IP6 address and configure the route.
-                </p>
-                <div class="code-block">
-                    <code>sudo ip a a fd00:1337:1::IP/48 dev eth0
-                        sudo ip -6 r a fd00:1337::/32 via fd00:1337:1::1 dev eth0
-                    </code>
-                </div>
+               
             </div>
         </div>
 
