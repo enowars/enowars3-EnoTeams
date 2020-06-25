@@ -6,3 +6,4 @@ certbot/
 app/teams.json
 app/downloads
 static/files/*
+postgres_data
