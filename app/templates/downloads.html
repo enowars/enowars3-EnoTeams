@@ -13,7 +13,12 @@ teamrouter.ova</a>, <a href="https://drive.google.com/file/d/1GN5QCESs35UVKTZd_A
                 <ul style="list-style: none;">
                     {% if download_options['DOWNLOAD_CONFIG_ENABLED'] %}
                         <li><i class="fa fa-download"></i>
-                            <a href="{{ url_for('download', file='vpn_config') }}">team{{ session[2] }}.conf</a>
+                            <a href="{{ url_for('download', file='game.conf') }}">team{{ session[2] }}.conf</a>
+                        </li>
+                    {% endif %}
+                    {% if download_options['DOWNLOAD_OPENVPN_CONFIG_ENABLED'] %}
+                        <li><i class="fa fa-download"></i>
+                            <a href="{{ url_for('download', file='team.ovpn') }}">team{{ session[2] }}.ovpn</a>
                         </li>
                     {% endif %}
                     {% if download_options['DOWNLOAD_KEY_ENABLED'] %}

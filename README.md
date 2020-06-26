@@ -94,10 +94,12 @@ Use the following name scheme:
 - Test VM: `test_vm.tar.gz`
 - VM: `vm.tar.gz`
 - VM Key: `vm.key`
-- VPN Configurations: `teamX.conf` with X increasing int (team 1 will be able to download the file `team1.conf`, team 2 `team2.conf` etc.)
+- Wireguard Configurations: `teamX.conf` with X increasing int (team 1 will be able to download the file `team1.conf`, team 2 `team2.conf` etc.)
+- OpenVPN Configurations: 'teamX.ovpn' with X increasing int (team 1 will be able to download the file `team1.conf`, team 2 `team2.conf` etc.)
 
 
 Authenticated downloads can be enabled/disabled through the `flask.cfg`:
     
     DOWNLOAD_CONFIG_ENABLED=True
+    DOWNLOAD_OPENVPN_CONFIG_ENABLED=True
     DOWNLOAD_KEY_ENABLED=True
